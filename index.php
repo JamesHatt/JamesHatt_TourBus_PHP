@@ -27,9 +27,12 @@ $statement = $gateway->getBuses();
         <link rel="icon" type="image/x-icon" href="images/TourBusCompany.jpeg">
     </head>
     <body>
+         <?php require_once 'toolbar.php' ?>
         <a href="home.php"><img src="images/TourBusCompany.jpg"></a>
         <h2>Welcome !</h2>
-        <?php require 'toolbar.php' ?>
+       
+        <?php require_once 'header.php' ?>
+        <?php require_once 'MainMenu.php' ?>
         <?php 
         if (isset($message)) {
             echo '<p>'.$message.'</p>';
@@ -68,5 +71,6 @@ $statement = $gateway->getBuses();
                 ?>
             </tbody>
         </table>
+        <?php require_once 'footer.php' ?>
     </body>
 </html>

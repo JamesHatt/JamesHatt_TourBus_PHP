@@ -35,6 +35,8 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
     </head>
     <body>
         <?php require 'toolbar.php' ?>
+         <?php require 'header.php' ?>
+          <?php require 'MainMenu.php' ?>
         <h1>Edit Bus Form</h1>
         <?php
         if (isset($errorMessage)) {
@@ -181,5 +183,6 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
             </table>
 
         </form>
+          <?php require 'footer.php' ?>
     </body>
 </html>

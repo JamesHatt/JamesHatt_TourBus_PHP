@@ -3,11 +3,13 @@ $session_id = session_id();
 if ($session_id == "") {
     session_start();
 }
+echo '<ul>';
 if (isset($_SESSION['username'])) {
-    echo '<p><a href="home.php">Home</a></p>';
-    echo '<p><a href="logout.php">Logout</a></p>';
+    echo '<li><a href="home.php">Home</a></li>';
+    echo '<li><a href="logout.php">Logout</a></li>';
 }
 else {
-    echo '<p><a href="index.php">Home</a></p>';
-    echo '<p><a href="login.php">Login</a></p>';
+    echo '<li><a href="index.php">Home</a></li>';
+    echo '<li><a href="loginForm.php">Login</a></li>';
 }
+echo '</ul>';

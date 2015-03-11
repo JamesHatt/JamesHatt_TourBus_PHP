@@ -1,6 +1,6 @@
 <?php
 
-class BusTableGateway {
+class GarageTableGateway {
 
     private $connection;
 
@@ -8,11 +8,9 @@ class BusTableGateway {
         $this->connection = $c;
     }
 
-    public function getBuses() {
+    public function getGarages() {
         // execute a query to get all buses
-        $sqlQuery = "SELECT b . * , g.name
-                    FROM buses b
-                    LEFT JOIN garage g ON g.garageID = b.garageID";
+        $sqlQuery = "SELECT * FROM garages";
 
         $statement = $this->connection->prepare($sqlQuery);
         $status = $statement->execute();
@@ -24,13 +22,13 @@ class BusTableGateway {
         return $statement;
     }
 
-    public function getBusById($bID) {
+    public function getGarageById($gID) {
         // execute a query to get the user with the specified id
-        $sqlQuery = "SELECT * FROM buses WHERE busesID = :busesID";
+        $sqlQuery = "SELECT * FROM garages WHERE garagesID = :garagesID";
 
         $statement = $this->connection->prepare($sqlQuery);
         $params = array(
-            "busesID" => $bID
+            "garagesID" => $gID
         );
 
         $status = $statement->execute($params);
@@ -42,8 +40,8 @@ class BusTableGateway {
         return $statement;
     }
 
-    public function insertBus($rn, $mk, $md, $nos, $es, $dbb, $ns) {
-        $sqlQuery = "INSERT INTO buses " .
+    public function insertGarage($rn, $mk, $md, $nos, $es, $dbb, $ns) {
+        $sqlQuery = "INSERT INTO garages " .
                 "(regNo, Make, Model, NoOfSeats, engineSize, dateBusBought, nextService) " .
                 "VALUES (:regNo, :make, :model, :noOfSeats, :engineSize, :dateBusBought, :nextService)";
 
@@ -69,12 +67,12 @@ class BusTableGateway {
         return $id;
     }
     
-    public function deleteBus ($bID) {
-        $sqlQuery = "DELETE FROM buses WHERE busesID = :busesID";
+    public function deleteGarage ($gID) {
+        $sqlQuery = "DELETE FROM garages WHERE garagesID = :garagesID";
         
         $statement = $this->connection->prepare($sqlQuery);
         $params = array(
-            "busesID" => $bID
+            "garagesID" => $gID
         );
         
         $status = $statement->execute($params);
@@ -86,10 +84,10 @@ class BusTableGateway {
         return ($statement->rowCount() == 1);
     }
     
-    public function updateBus($bID, $rn, $mk, $md, $nos, $es, $dbb, $ns){
+    public function updateGarage($gID, $rn, $mk, $md, $nos, $es, $dbb, $ns){
                 
         $sqlQuery =
-                "UPDATE buses SET " .
+                "UPDATE garages SET " .
                 "regNo = :regNo, " .
                 "make = :make, " .
                 "model = :model, " .
@@ -97,12 +95,12 @@ class BusTableGateway {
                 "engineSize = :engineSize, " .
                 "dateBusBought = :dateBusBought, " .
                 "nextService = :nextService " .
-                "WHERE busesID = :busesID";
+                "WHERE garagesID = :garagesID";
         
         $statement = $this->connection->prepare($sqlQuery);
         $params = array
             (
-            "busesID" => $bID,
+            "garagesID" => $gID,
             "regNo" => $rn,
             "make" => $mk,
             "model" => $md,

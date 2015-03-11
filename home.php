@@ -24,52 +24,18 @@ $statement = $gateway->getBuses();
         <script type="text/javascript" src="js/bus.js"></script> 
     </head>
     <body>
+        <?php require_once 'toolbar.php' ?>
         <a href="home.php"><img src="images/TourBusCompany.jpg"></a>
-        <?php require 'toolbar.php' ?>
-        <?php
+        <?php require_once 'header.php' ?>
+        <?php require_once 'MainMenu.php' ?>
         if (isset($message)) {
             echo '<p>'.$message.'</p>';
         }
         ?>
-        <table border ="1" style="width:100%" id="t01">           
-            <thead>
-                <tr>
-                    <th>Buses ID</th>
-                    <th>Registration Number</th>
-                    <th>Make</th>
-                    <th>Model</th>
-                    <th>Seat Numbers</th>
-                    <th>Engine Size</th>
-                    <th>Date Bought</th>
-                    <th>Next Service</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $row = $statement->fetch(PDO::FETCH_ASSOC);
-                while($row)
-                {
-                    echo '<td>' .$row['busesID'] .  '</td>';
-                    echo '<td>' .$row['regNo'] .  '</td>';
-                    echo '<td>' .$row['Make'] .  '</td>';
-                    echo '<td>' .$row['Model'] .  '</td>';
-                    echo '<td>' .$row['NoOfSeats'] .  '</td>';
-                    echo '<td>' .$row['engineSize'] .  '</td>';
-                    echo '<td>' .$row['dateBusBought'] .  '</td>';
-                    echo '<td>' .$row['nextService'] .  '</td>';                  
-                    echo '<td>'
-                    . '<a href="viewBus.php?id='.$row['busesID'].'">View</a> '
-                    . '<a href="editBusForm.php?id='.$row['busesID'].'">Edit</a> '
-                    . '<a href="deleteBus.php?id='.$row['busesID'].'">Delete</a> '
-                    . '</td>';                   
-                    
-                    echo ' </tr>';
-                    
-                    $row = $statement->fetch(PDO::FETCH_ASSOC);
-                }
-                ?>
-            </tbody>
-        </table>
-        <p><a href="createBusForm.php">Create Bus</a></p>
+        <p>Welcome to the Tour Bus Company</p>
+        
+        <p> more text goes here</p>
+        
+        <?php require_once 'footer.php' ?>
     </body>
 </html>

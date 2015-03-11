@@ -31,6 +31,8 @@ $statement = $gateway->getBusById($id);
     </head>
     <body>
         <?php require 'toolbar.php' ?>
+        <?php require 'header.php' ?>
+        <?php require 'MainMenu.php' ?>
         <?php
         if (isset($message)) {
             echo '<p>'.$message.'</p>';
@@ -79,6 +81,7 @@ $statement = $gateway->getBusById($id);
             <a class="deleteBus" href="deleteBus.php?id=<?php echo $row['busesID']; ?>">
                 Delete Bus</a>
         </p>
+        <?php require 'toolbar.php' ?>
     </body>
 </html>
 

@@ -15,7 +15,11 @@ require 'ensureUserLoggedIn.php';
         <link rel="stylesheet" type ="style/css" href =Css/style.css>
     </head>
     <body>
-        <?php require 'toolbar.php' ?>
+       
+       <?php  require 'toolbar.php' ?>
+       <?php  require 'header.php' ?>
+       <?php   require 'MainMenu.php' ?>
+     
         <h1>Create Bus Form</h1>
         <?php
         if (isset($errorMessage)) {
@@ -84,5 +88,6 @@ require 'ensureUserLoggedIn.php';
             </table>
 
         </form>
+         <?php require 'footer.php' ?>
     </body>
 </html>

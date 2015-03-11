@@ -5,6 +5,9 @@
         <title></title>
     </head>
     <body>
+        <?php require_once 'toolbar.php'?>
+        <?php require_once 'header.php'?>
+        <?php require_once 'MainMenu.php'?>
         <form id="registerForm" 
               action="checkRegister.php" 
               method="POST" 
@@ -65,6 +68,7 @@
 
         </form>
         <script type="text/javascript" src="js/register.js"></script>
+        <?php require_once 'footer.php' ?>
     </body>
 </html>
 
