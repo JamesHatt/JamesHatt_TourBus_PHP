@@ -10,7 +10,7 @@ if ($id == "") {
 require 'ensureUserLoggedIn.php';
 
 $connection = Connection::getInstance();
-$garageGateway = new GarageTableGateway($conn);
+$garageGateway = new GarageTableGateway($connection);
 
 $garages = $garageGateway->getGarages();
 ?>
@@ -45,7 +45,7 @@ $garages = $garageGateway->getGarages();
                                     echo $_POST['regNo'];
                                 }
                             ?>" />
-                            <span id="regNoError" class="error">
+                            <span id="regNoError" class="error"><?php
                                 if (isset($errorMessage) && isset($errorMessage['regNo'])) {
                                     echo $errorMessage['regNo'];
                                 }
@@ -61,7 +61,7 @@ $garages = $garageGateway->getGarages();
                                         echo $_POST['make'];
                                     }
                                 ?>" />
-                            <span id="makeError" class="error">
+                            <span id="makeError" class="error"> <?php
                                 if (isset($errorMessage) && isset($errorMessage['make'])) {
                                     echo $errorMessage['make'];
                                 }
@@ -77,7 +77,7 @@ $garages = $garageGateway->getGarages();
                                         echo $_POST['model'];
                                     }
                                 ?>" />
-                            <span id="modelError" class="error">
+                            <span id="modelError" class="error"><?php
                                 if (isset($errorMessage) && isset($errorMessage['model'])) {
                                     echo $errorMessage['model'];
                                 }
@@ -93,7 +93,7 @@ $garages = $garageGateway->getGarages();
                                         echo $_POST['noOfSeats'];
                                     }
                                 ?>" />
-                            <span id="noOfSeatsError" class="error">
+                            <span id="noOfSeatsError" class="error"><?php
                                 if (isset($errorMessage) && isset($errorMessage['noOfSeats'])) {
                                     echo $errorMessage['noOfSeats'];
                                 }
@@ -109,7 +109,7 @@ $garages = $garageGateway->getGarages();
                                         echo $_POST['engineSize'];
                                     }
                                 ?>" />
-                            <span id="engineSizeError" class="error">
+                            <span id="engineSizeError" class="error"><?php
                                 if (isset($errorMessage) && isset($errorMessage['engineSize'])) {
                                     echo $errorMessage['engineSize'];
                                 }
@@ -125,7 +125,7 @@ $garages = $garageGateway->getGarages();
                                         echo $_POST['dateBusBought'];
                                     }
                                 ?>" />
-                            <span id="dateBusBoughtError" class="error">
+                            <span id="dateBusBoughtError" class="error"><?php
                                 if (isset($errorMessage) && isset($errorMessage['dateBusBought'])) {
                                     echo $errorMessage['dateBusBought'];
                                 }
@@ -141,7 +141,7 @@ $garages = $garageGateway->getGarages();
                                         echo $_POST['nextService'];
                                     }
                                 ?>" />
-                            <span id="nextServiceError" class="error">
+                            <span id="nextServiceError" class="error"><?php
                                 if (isset($errorMessage) && isset($errorMessage['nextService'])) {
                                     echo $errorMessage['nextService'];
                                 }
@@ -153,7 +153,7 @@ $garages = $garageGateway->getGarages();
                         <td>Garage</td>
                         <td>
                             <select name="garageID">
-                                <option value="-1"> No Manager</option>
+                                <option value="-1"> No Garage</option>
                                 <?php
                                 $g = $garages->fetch(PDO::FETCH_ASSOC);
                                 while ($g) {

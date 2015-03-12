@@ -16,7 +16,7 @@ class GarageTableGateway {
         $status = $statement->execute();
 
         if (!$status) {
-            die("Could not retrieve users");
+            die("Could not retrieve garages");
         }
 
         return $statement;
@@ -34,7 +34,7 @@ class GarageTableGateway {
         $status = $statement->execute($params);
 
         if (!$status) {
-            die("Could not retrieve user");
+            die("Could not retrieve garage");
         }
 
         return $statement;
@@ -59,7 +59,7 @@ class GarageTableGateway {
         $status = $statement->execute($params);
 
         if (!$status) {
-            die("Could not insert user");
+            die("Could not insert garage");
         }
 
         $id = $this->connection->lastInsertId();
@@ -78,7 +78,7 @@ class GarageTableGateway {
         $status = $statement->execute($params);
         
         if (!$status) {
-            die("Could not delete user");
+            die("Could not delete garage");
         }
         
         return ($statement->rowCount() == 1);
