@@ -19,15 +19,20 @@ $gateway = new BusTableGateway($connection);
 
 
 //Comment in code
-$regNo = $_POST['regNo'];
-$make = $_POST['make'];
-$model= $_POST['model'];
-$noOfSeats = $_POST['noOfSeats'];
-$engineSize = $_POST['engineSize'];
-$dateBusBought = $_POST['dateBusBought'];
-$nextService = $_POST['nextService'];
+$regNo     = filter_input(INPUT_POST, 'regNo',    FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$make     = filter_input(INPUT_POST, '$make',    FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$model     = filter_input(INPUT_POST, '$model',    FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$noOfSeats     = filter_input(INPUT_POST, '$noOfSeats',    FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$engineSize     = filter_input(INPUT_POST, '$engineSize',    FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$dateBusBought     = filter_input(INPUT_POST, '$dateBusBought',    FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$nextService     = filter_input(INPUT_POST, '$nextService',    FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$garageID     = filter_input(INPUT_POST, 'garageID',    FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+if ($garageID == -1) {
+    $garageID = NULL;
+}
 
-$id = $gateway->insertBus($regNo, $make, $model, $noOfSeats, $engineSize, $dateBusBought, $nextService);
+
+$id = $gateway->insertBus($regNo, $make, $model, $noOfSeats, $engineSize, $dateBusBought, $nextService, $garageID);
 
 $message = " Your Bus was Created Successfully ";
 

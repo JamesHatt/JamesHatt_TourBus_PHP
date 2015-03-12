@@ -42,10 +42,10 @@ class BusTableGateway {
         return $statement;
     }
 
-    public function insertBus($rn, $mk, $md, $nos, $es, $dbb, $ns) {
+    public function insertBus($rn, $mk, $md, $nos, $es, $dbb, $ns, $gID) {
         $sqlQuery = "INSERT INTO buses " .
-                "(regNo, Make, Model, NoOfSeats, engineSize, dateBusBought, nextService) " .
-                "VALUES (:regNo, :make, :model, :noOfSeats, :engineSize, :dateBusBought, :nextService)";
+                "(regNo, Make, Model, NoOfSeats, engineSize, dateBusBought, nextService, garageID) " .
+                "VALUES (:regNo, :make, :model, :noOfSeats, :engineSize, :dateBusBought, :nextService, :garageID)";
 
         $statement = $this->connection->prepare($sqlQuery);
         $params = array(
@@ -55,7 +55,8 @@ class BusTableGateway {
             "noOfSeats" => $nos,
             "engineSize" => $es,
             "dateBusBought" => $dbb,
-            "nextService" => $ns
+            "nextService" => $ns,
+            "garageID" => $gID
         );
 
         $status = $statement->execute($params);

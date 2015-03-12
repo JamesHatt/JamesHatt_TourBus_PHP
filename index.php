@@ -71,6 +71,9 @@ $statement = $gateway->getBuses();
                 ?>
             </tbody>
         </table>
+        <ul>
+            <li><a href="createBusForm.php">create bus</a></li>
+</ul>
         <?php require_once 'footer.php' ?>
     </body>
 </html>

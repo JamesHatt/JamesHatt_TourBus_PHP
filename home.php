@@ -28,14 +28,12 @@ $statement = $gateway->getBuses();
         <a href="home.php"><img src="images/TourBusCompany.jpg"></a>
         <?php require_once 'header.php' ?>
         <?php require_once 'MainMenu.php' ?>
-        if (isset($message)) {
-            echo '<p>'.$message.'</p>';
-        }
-        ?>
+        
         <p>Welcome to the Tour Bus Company</p>
         
         <p> more text goes here</p>
         
         <?php require_once 'footer.php' ?>
+        <?php require 'scripts.php'; ?>
     </body>
 </html>
