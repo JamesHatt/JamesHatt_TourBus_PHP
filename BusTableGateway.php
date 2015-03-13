@@ -10,7 +10,7 @@ class BusTableGateway {
 
     public function getBuses() {
         // execute a query to get all buses
-        $sqlQuery = "SELECT b . * , g.name
+        $sqlQuery = "SELECT b . * , g.name AS garageName
                     FROM buses b
                     LEFT JOIN garage g ON g.garageID = b.garageID";
 
@@ -18,7 +18,7 @@ class BusTableGateway {
         $status = $statement->execute();
 
         if (!$status) {
-            die("Could not retrieve users");
+            die("Could not retrieve bus");
         }
 
         return $statement;
@@ -26,7 +26,10 @@ class BusTableGateway {
 
     public function getBusById($bID) {
         // execute a query to get the user with the specified id
-        $sqlQuery = "SELECT * FROM buses WHERE busesID = :busesID";
+        $sqlQuery = "SELECT b . * , g.name AS garageName
+                    FROM buses b
+                    LEFT JOIN garage g ON g.garageID = b.garageID
+                    WHERE b.id = :id";
 
         $statement = $this->connection->prepare($sqlQuery);
         $params = array(
@@ -36,7 +39,7 @@ class BusTableGateway {
         $status = $statement->execute($params);
 
         if (!$status) {
-            die("Could not retrieve user");
+            die("Could not retrieve bus");
         }
 
         return $statement;
@@ -62,7 +65,7 @@ class BusTableGateway {
         $status = $statement->execute($params);
 
         if (!$status) {
-            die("Could not insert user");
+            die("Could not insert bus");
         }
 
         $id = $this->connection->lastInsertId();
@@ -81,13 +84,13 @@ class BusTableGateway {
         $status = $statement->execute($params);
         
         if (!$status) {
-            die("Could not delete user");
+            die("Could not delete bus");
         }
         
         return ($statement->rowCount() == 1);
     }
     
-    public function updateBus($bID, $rn, $mk, $md, $nos, $es, $dbb, $ns){
+    public function updateBus($bID, $rn, $mk, $md, $nos, $es, $dbb, $ns, $gID){
                 
         $sqlQuery =
                 "UPDATE buses SET " .
@@ -97,7 +100,8 @@ class BusTableGateway {
                 "noOfSeats = :noOfSeats, " .
                 "engineSize = :engineSize, " .
                 "dateBusBought = :dateBusBought, " .
-                "nextService = :nextService " .
+                "nextService = :nextService, " .
+                "garageID = :garageID " . 
                 "WHERE busesID = :busesID";
         
         $statement = $this->connection->prepare($sqlQuery);
@@ -110,7 +114,8 @@ class BusTableGateway {
             "noOfSeats" => $nos,
             "engineSize" => $es,
             "dateBusBought" => $dbb,
-            "nextService" => $ns             
+            "nextService" => $ns,
+            "garageID" => $gID
             );
         
         $status = $statement->execute($params);

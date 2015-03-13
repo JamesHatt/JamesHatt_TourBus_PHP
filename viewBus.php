@@ -18,9 +18,9 @@ if (!isset($_GET) || !isset($_GET['id'])) {
 $id = $_GET['id'];
 
 $connection = Connection::getInstance();
-$gateway = new BusTableGateway($connection);
+$busGateway = new BusTableGateway($connection);
 
-$statement = $gateway->getBusById($id);
+$buses = $busGateway->getBusById($id);
 ?>
 <!DOCTYPE html>
 <html>
@@ -45,33 +45,36 @@ $statement = $gateway->getBusById($id);
                 $row = $statement->fetch(PDO::FETCH_ASSOC);
                     echo '<tr>';
                     echo '<td>Registration Number:</td>'
-                    . '<td>' . $row['regNo'] . '</td>';
+                    . '<td>' . $bus['regNo'] . '</td>';
                     echo '</tr>';
                     echo '<tr>';
                     echo '<td>Make:</td>'
-                    . '<td>' . $row['Make'] . '</td>';
+                    . '<td>' . $bus['Make'] . '</td>';
                     echo '</tr>';
                     echo '<tr>';
                     echo '<td>Model:</td>'
-                    . '<td>' . $row['Model'] . '</td>';
+                    . '<td>' . $bus['Model'] . '</td>';
                     echo '</tr>';
                     echo '<tr>';
                     echo '<td>Number of Seats:</td>'
-                    . '<td>' . $row['NoOfSeats'] . '</td>';
+                    . '<td>' . $bus['NoOfSeats'] . '</td>';
                     echo '</tr>';
                     echo '<tr>';
                     echo '<td>Engine Size:</td>'
-                    . '<td>' . $row['engineSize'] . '</td>';
+                    . '<td>' . $bus['engineSize'] . '</td>';
                     echo '</tr>';
                     echo '<tr>';
                     echo '<td>Date Bus Bought:</td>'
-                    . '<td>' . $row['dateBusBought'] . '</td>';
+                    . '<td>' . $bus['dateBusBought'] . '</td>';
                     echo '</tr>';
                     echo '<tr>';
                     echo '<td>Next Bus Service:</td>'
-                    . '<td>' . $row['nextService'] . '</td>';
+                    . '<td>' . $bus['nextService'] . '</td>';
                     echo '</tr>';
-
+                    echo '<tr>';
+                    echo '<td>Garage:</td>'
+                    . '<td>' . $bus['garageName'] . '</td>';
+                    echo '</tr>';
                 ?>
             </tbody>
         </table>

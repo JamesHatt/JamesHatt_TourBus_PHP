@@ -40,20 +40,18 @@ class GarageTableGateway {
         return $statement;
     }
 
-    public function insertGarage($rn, $mk, $md, $nos, $es, $dbb, $ns) {
+    public function insertGarage($n, $a, $pn, $nog, $m) {
         $sqlQuery = "INSERT INTO garages " .
-                "(regNo, Make, Model, NoOfSeats, engineSize, dateBusBought, nextService) " .
-                "VALUES (:regNo, :make, :model, :noOfSeats, :engineSize, :dateBusBought, :nextService)";
+                "(name, address, phoneNo, nameOfGarage, manager) " .
+                "VALUES (:name, :address, :phoneNo, :nameOfGarage, :manager)";
 
         $statement = $this->connection->prepare($sqlQuery);
         $params = array(
-            "regNo" => $rn,
-            "make" => $mk,
-            "model" => $md,
-            "noOfSeats" => $nos,
-            "engineSize" => $es,
-            "dateBusBought" => $dbb,
-            "nextService" => $ns
+            "name" => $n,
+            "address" => $a,
+            "phoneNo" => $pn,
+            "nameOfGarage" => $nog,
+            "manager" => $m
         );
 
         $status = $statement->execute($params);
@@ -84,30 +82,26 @@ class GarageTableGateway {
         return ($statement->rowCount() == 1);
     }
     
-    public function updateGarage($gID, $rn, $mk, $md, $nos, $es, $dbb, $ns){
+    public function updateGarage($gID, $n, $a, $pn, $nog, $m){
                 
         $sqlQuery =
                 "UPDATE garages SET " .
-                "regNo = :regNo, " .
-                "make = :make, " .
-                "model = :model, " .
-                "noOfSeats = :noOfSeats, " .
-                "engineSize = :engineSize, " .
-                "dateBusBought = :dateBusBought, " .
-                "nextService = :nextService " .
+                "name = :name, " .
+                "address = :address, " .
+                "phoneNo = :phoneNo, " .
+                "nameOfGarage = :nameOfGarage, " .
+                "manager = :manager, " .
                 "WHERE garagesID = :garagesID";
         
         $statement = $this->connection->prepare($sqlQuery);
         $params = array
             (
             "garagesID" => $gID,
-            "regNo" => $rn,
-            "make" => $mk,
-            "model" => $md,
-            "noOfSeats" => $nos,
-            "engineSize" => $es,
-            "dateBusBought" => $dbb,
-            "nextService" => $ns             
+            "name" => $n,
+            "address" => $a,
+            "phoneNo" => $pn,
+            "nameOfGarage" => $nog,
+            "manager" => $m        
             );
         
         $status = $statement->execute($params);

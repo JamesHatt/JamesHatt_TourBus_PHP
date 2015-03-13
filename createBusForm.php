@@ -157,7 +157,7 @@ $garages = $garageGateway->getGarages();
                                 <?php
                                 $g = $garages->fetch(PDO::FETCH_ASSOC);
                                 while ($g) {
-                                    echo '<option value="' . $g['id'] .'">' . $g['name'] .'</option>';
+                                    echo '<option value="' . $g['id'] .'">' . $g['nameOfGarage'] .'</option>';
                                     $g = $garages->fetch(PDO::FETCH_ASSOC);
                                 }
                                 ?>

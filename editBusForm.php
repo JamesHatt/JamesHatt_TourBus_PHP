@@ -1,7 +1,7 @@
 <?php
-require_once 'Bus.php';
 require_once 'Connection.php';
 require_once 'BusTableGateway.php';
+require_once 'GarageTableGateway.php';
 /* "require_once" means that a stored piece of data
   will remain as an output by having to load it just once*/
 
@@ -17,14 +17,17 @@ if (!isset($_GET) || !isset($_GET['id'])) {
 }
 $id = $_GET['id'];
 
-$connection = Connection::getInstance();
+$conn = Connection::getInstance();
 $gateway = new BusTableGateway($connection);
+$garageGateway = new GarageTableGateway($connection);
 
-$statement = $gateway->getBusById($id);
-if ($statement->rowCount() !== 1) {
+$buses = $gateway->getBusById($bID);
+if ($buses->rowCount() !== 1) {
     die("Illegal request");
 }
-$row = $statement->fetch(PDO::FETCH_ASSOC);
+$Bus = $Buses->fetch(PDO::FETCH_ASSOC);
+
+$garages = $garageGateway->getGarages();
 ?>
 <!DOCTYPE html>
 <html>
@@ -173,6 +176,26 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
                             </span>
                         </td>
                     </tr>
+                    <tr>
+                        <td>Garage</td>
+                        <td>
+                            <select name="garageID">
+                                <option value="-1"> No Garage</option>
+                                <?php
+                                $g = $garages->fetch(PDO::FETCH_ASSOC);
+                                while ($g) {
+                                    $selected = "";
+                                    if($g['gID'] == $Bus['garageID']) {
+                                        $selected = "selected";
+                                    }
+                                    echo '<option value="' . $g['gID'] . '" ' . $selected . '>' . $g['nameOfGarage'] . '</option>';
+                                    $g = $garages->fetch(PDO::FETCH_ASSOC);
+                                }
+                                ?>
+                            </select>
+                        </td>
+                    </tr>
+                    
                     <tr>
                         <td></td>
                         <td>
