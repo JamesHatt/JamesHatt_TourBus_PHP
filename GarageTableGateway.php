@@ -21,7 +21,28 @@ class GarageTableGateway {
 
         return $statement;
     }
+    
+    public function getGaragesByBusId($busesID) {
+        // execute a query to get all buses
+        $sqlQuery = "SELECT g.*, b.make AS busMake 
+                FROM garages g 
+                LEFT JOIN buses b ON busesID = g.busesID 
+                WHERE g.busesID = :busesID";
+        
+        $params = array(
+            "busesID" => $busesID
+        );               
+        $statement = $this->connection->prepare($sqlQuery);
+        $status = $statement->execute();
 
+        if (!$status) {
+            die("Could not retrieve garages");
+        }
+
+        return $statement;
+    }
+
+    
     public function getGarageById($gID) {
         // execute a query to get the user with the specified id
         $sqlQuery = "SELECT * FROM garages WHERE garageID = :garageID";
@@ -40,6 +61,7 @@ class GarageTableGateway {
         return $statement;
     }
 
+    //related to the create garage form
     public function insertGarage($n, $a, $pn, $nog, $m) {
         $sqlQuery = "INSERT INTO garages " .
                 "(name, address, phoneNo, nameOfGarage, manager) " .

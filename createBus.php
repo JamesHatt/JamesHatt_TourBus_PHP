@@ -23,14 +23,14 @@ echo '<pre>';
         echo '</pre>';
 
 //Comment in code
-$regNo     = filter_input(INPUT_POST, 'regNo',    FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-$Make     = filter_input(INPUT_POST, '$Make',    FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-$Model     = filter_input(INPUT_POST, '$Model',    FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-$NoOfSeats     = filter_input(INPUT_POST, '$NoOfSeats',    FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$regNo          = filter_input(INPUT_POST, 'regNo',    FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$Make           = filter_input(INPUT_POST, '$Make',    FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$Model          = filter_input(INPUT_POST, '$Model',    FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$NoOfSeats      = filter_input(INPUT_POST, '$NoOfSeats',    FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 $engineSize     = filter_input(INPUT_POST, '$engineSize',    FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-$dateBusBought     = filter_input(INPUT_POST, '$dateBusBought',    FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-$nextService     = filter_input(INPUT_POST, '$nextService',    FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-$garageID     = filter_input(INPUT_POST, 'garageID',    FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$dateBusBought  = filter_input(INPUT_POST, '$dateBusBought',    FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$nextService    = filter_input(INPUT_POST, '$nextService',    FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$garageID       = filter_input(INPUT_POST, 'garageID',    FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 if ($garageID == -1) {
     $garageID = NULL;
 }

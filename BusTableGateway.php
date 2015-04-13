@@ -76,6 +76,7 @@ class BusTableGateway {
         return $statement;
     }
 
+    // related to the create bus form, here is the method
     public function insertBus($rn, $mk, $md, $nos, $es, $dbb, $ns, $gID) {
         $sqlQuery = "INSERT INTO buses " .
                 "(regNo, Make, Model, NoOfSeats, engineSize, dateBusBought, nextService, garageID)" .
@@ -104,6 +105,7 @@ class BusTableGateway {
         return $id;
     }
 
+    //here is the delete bus method
     public function deleteBus($bID) {
         $sqlQuery = "DELETE FROM buses WHERE busesID = :busesID";
 
@@ -121,6 +123,7 @@ class BusTableGateway {
         return ($statement->rowCount() == 1);
     }
 
+    // here is the update method
     public function updateBus($bID, $rn, $mk, $md, $nos, $es, $dbb, $ns, $gID) {
 
         $sqlQuery = "UPDATE buses SET " .

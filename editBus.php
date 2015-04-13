@@ -15,6 +15,8 @@ require 'ensureUserLoggedIn.php';
 $connection = Connection::getInstance();
 $gateway = new BusTableGateway($connection);
 
+/*FILTER SSANTIZE meaning it filters out any characters that are not strings*/
+
 $busesID             = filter_input(INPUT_POST, 'busesID',          FILTER_SANITIZE_NUMBER_INT);
 $regNo               = filter_input(INPUT_POST, 'regNo',          FILTER_SANITIZE_NUMBER_INT);
 $make                = filter_input(INPUT_POST, 'make',          FILTER_SANITIZE_NUMBER_INT);

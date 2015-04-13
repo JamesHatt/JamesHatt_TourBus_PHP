@@ -1,10 +1,7 @@
 <?php
+
 require_once 'Connection.php';
 require_once 'GarageTableGateway.php';
-
-/* "require_once" means that a stored piece of data
-  will remain as an output by having to load it just once*/
-
 $id = session_id();
 if ($id == "") {
     session_start();
@@ -12,19 +9,8 @@ if ($id == "") {
 
 require 'ensureUserLoggedIn.php';
 
-if (!isset($_GET) || !isset($_GET['garageID'])) {
-    die('Invalid request');
-}
-$id = $_GET['garageID'];
-
 $connection = Connection::getInstance();
 $garageGateway = new GarageTableGateway($connection);
-
-$statement = $gateway->getGarageById($id);
-if ($statement->rowCount() !== 1) {
-    die("Illegal request");
-}
-$row = $statement->fetch(PDO::FETCH_ASSOC);
 
 $garages = $garageGateway->getGarages();
 ?>
@@ -34,19 +20,21 @@ $garages = $garageGateway->getGarages();
         <meta charset="UTF-8">
         <title></title>
         <script type="text/javascript" src="js/garage.js"></script>
+        <link rel="stylesheet" type ="style/css" href =css/style.css>
     </head>
     <body>
-        <?php require 'toolbar.php' ?>
-         <?php require 'header.php' ?>
-          <?php require 'MainMenu.php' ?>
-        <h1>Edit Garage Form</h1>
+       
+       <?php  require 'toolbar.php' ?>
+       <?php  require 'header.php' ?>
+       <?php   require 'MainMenu.php' ?>
+     
+        <h1>Create Garage Form</h1>
         <?php
         if (isset($errorMessage)) {
             echo '<p>Error: ' . $errorMessage . '</p>';
         }
         ?>
-        <form id="editGarageForm" name="editGarageForm" action="editGarage.php" method="POST">
-            <input type="hidden" name="editID" value="<?php echo $id; ?>" />
+        <form id="createGarageForm" name="createGarageForm" action="createGarage.php" method="POST">
             <table border="0">
                 <tbody>
                     <tr>
@@ -56,10 +44,8 @@ $garages = $garageGateway->getGarages();
                                 if (isset($_POST) && isset($_POST['name'])) {
                                     echo $_POST['name'];
                                 }
-                                else echo $row['name'];
                             ?>" />
-                            <span id="nameError" class="error">
-                                <?php
+                            <span id="nameError" class="error"><?php
                                 if (isset($errorMessage) && isset($errorMessage['name'])) {
                                     echo $errorMessage['name'];
                                 }
@@ -71,13 +57,11 @@ $garages = $garageGateway->getGarages();
                         <td>Address</td>
                         <td>
                             <input type="text" name="address" value="<?php
-                                if (isset($_POST) && isset($_POST['address'])) {
-                                    echo $_POST['address'];
-                                }
-                                else echo $row['address'];
-                            ?>" />
-                            <span id="addressError" class="error">
-                                <?php
+                                    if (isset($_POST) && isset($_POST['address'])) {
+                                        echo $_POST['address'];
+                                    }
+                                ?>" />
+                            <span id="addressError" class="error"> <?php
                                 if (isset($errorMessage) && isset($errorMessage['address'])) {
                                     echo $errorMessage['address'];
                                 }
@@ -89,13 +73,11 @@ $garages = $garageGateway->getGarages();
                         <td>Phone Number</td>
                         <td>
                             <input type="text" name="phoneNo" value="<?php
-                                if (isset($_POST) && isset($_POST['phoneNo'])) {
-                                    echo $_POST['phoneNo'];
-                                }
-                                else echo $row['phoneNo'];
-                            ?>" />
-                            <span id="phoneNoError" class="error">
-                                <?php
+                                    if (isset($_POST) && isset($_POST['phoneNo'])) {
+                                        echo $_POST['phoneNo'];
+                                    }
+                                ?>" />
+                            <span id="phoneNoError" class="error"><?php
                                 if (isset($errorMessage) && isset($errorMessage['phoneNo'])) {
                                     echo $errorMessage['phoneNo'];
                                 }
@@ -107,13 +89,11 @@ $garages = $garageGateway->getGarages();
                         <td>Name Of Garage</td>
                         <td>
                             <input type="text" name="nameOfGarage" value="<?php
-                                if (isset($_POST) && isset($_POST['nameOfGarage'])) {
-                                    echo $_POST['nameOfGarage'];
-                                }
-                                else echo $row['nameOfGarage'];
-                            ?>" />
-                            <span id="nameOfGarageError" class="error">
-                                <?php
+                                    if (isset($_POST) && isset($_POST['nameOfGarage'])) {
+                                        echo $_POST['nameOfGarage'];
+                                    }
+                                ?>" />
+                            <span id="nameOfGarageError" class="error"><?php
                                 if (isset($errorMessage) && isset($errorMessage['nameOfGarage'])) {
                                     echo $errorMessage['nameOfGarage'];
                                 }
@@ -125,13 +105,11 @@ $garages = $garageGateway->getGarages();
                         <td>Manager</td>
                         <td>
                             <input type="text" name="manager" value="<?php
-                                if (isset($_POST) && isset($_POST['manager'])) {
-                                    echo $_POST['manager'];
-                                }
-                                else echo $row['manager'];
-                            ?>" />
-                            <span id="managerError" class="error">
-                                <?php
+                                    if (isset($_POST) && isset($_POST['manager'])) {
+                                        echo $_POST['manager'];
+                                    }
+                                ?>" />
+                            <span id="managerError" class="error"><?php
                                 if (isset($errorMessage) && isset($errorMessage['manager'])) {
                                     echo $errorMessage['manager'];
                                 }
@@ -143,25 +121,13 @@ $garages = $garageGateway->getGarages();
                     <tr>
                         <td></td>
                         <td>
-                            <input type="submit" value="Update Garage" name="updateGarage" />
+                            <input type="submit" value="Create Garage" name="createGarage" />
                         </td>
                     </tr>
                 </tbody>
             </table>
 
         </form>
-          <?php require 'footer.php';
-          echo '<pre>';
-        print_r($_POST);
-        print_r($params);
-        print_r($sqlQuery);
-        echo '</pre>';
-          
-          
-          
-          
-          
-          ?>
-         
+         <?php require 'footer.php' ?>
     </body>
 </html>

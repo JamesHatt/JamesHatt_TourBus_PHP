@@ -17,7 +17,7 @@ if ($id == "") {
 $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
 $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
 
-/*FILTER SSANTIZE meaning it filters out any characters that are nto strings*/
+/*FILTER SSANTIZE meaning it filters out any characters that are not strings*/
 
 /* mainly used against hackers so they wont access system /steal files etc */
 

@@ -85,6 +85,42 @@ $statement = $gateway->getBuses($sortOrder);
             <a class="deleteBus" href="deleteBus.php?id=<?php echo $row['busesID']; ?>">
                 Delete Bus</a>
         </p>
+        <h3> Garage assigned to <?php echo $row['Make']; ?>
+         <table border ="1" style="width:100%" id="t01">           
+            <thead>
+                <tr>
+                    <th>Garages ID</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Phone Number</th>
+                    <th>Name Of Garage</th>
+                    <th>Manager</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $row = $garages->fetch(PDO::FETCH_ASSOC);
+                while($row)
+                {
+                    echo '<td>' .$row['garageID'] .  '</td>';
+                    echo '<td>' .$row['name'] .  '</td>';
+                    echo '<td>' .$row['address'] .  '</td>';
+                    echo '<td>' .$row['phoneNo'] .  '</td>';
+                    echo '<td>' .$row['nameOfGarage'] .  '</td>';
+                    echo '<td>' .$row['manager'] .  '</td>';               
+                    echo '<td>'
+                    . '<a href="viewGarage.php?id='.$row['garageID'].'">View</a> '
+                    . '<a href="editGarageForm.php?id='.$row['garageID'].'">Edit</a> '
+                    . '<a href="deleteGarage.php?id='.$row['garageID'].'">Delete</a> '
+                    . '</td>';                   
+                    
+                    echo ' </tr>';
+                    
+                    $row = $garages->fetch(PDO::FETCH_ASSOC);
+                }
+                ?>
+            </tbody>
+        </table>
            <?php require 'footer.php'; ?>
 
     </body>

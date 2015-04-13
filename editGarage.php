@@ -15,6 +15,8 @@ require 'ensureUserLoggedIn.php';
 $connection = Connection::getInstance();
 $gateway = new GarageTableGateway($connection);
 
+/*FILTER SSANTIZE meaning it filters out any characters that are not strings*/
+
 $garageID             = filter_input(INPUT_POST, 'garageID',          FILTER_SANITIZE_NUMBER_INT);
 $name                 = filter_input(INPUT_POST, 'name',              FILTER_SANITIZE_NUMBER_INT);
 $address              = filter_input(INPUT_POST, 'address',           FILTER_SANITIZE_NUMBER_INT);
