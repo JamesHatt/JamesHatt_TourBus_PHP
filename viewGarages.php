@@ -1,6 +1,7 @@
 <?php
 require_once 'Connection.php';
 require_once 'GarageTableGateway.php';
+require_once 'Garage.php';
 
 require 'ensureUserLoggedIn.php';
 
@@ -32,13 +33,11 @@ $garages = $garageGateway->getGarages();
             <thead>
                 <tr>
                     <th>Garages ID</th>
-                    <th>Registration Number</th>
-                    <th>Make</th>
-                    <th>Model</th>
-                    <th>Seat Numbers</th>
-                    <th>Engine Size</th>
-                    <th>Date Bought</th>
-                    <th>Next Service</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Phone Number</th>
+                    <th>Name Of Garage</th>
+                    <th>Manager</th>
                 </tr>
             </thead>
             <tbody>
@@ -46,18 +45,16 @@ $garages = $garageGateway->getGarages();
                 $row = $garages->fetch(PDO::FETCH_ASSOC);
                 while($row)
                 {
-                    echo '<td>' .$row['garagesID'] .  '</td>';
-                    echo '<td>' .$row['regNo'] .  '</td>';
-                    echo '<td>' .$row['Make'] .  '</td>';
-                    echo '<td>' .$row['Model'] .  '</td>';
-                    echo '<td>' .$row['NoOfSeats'] .  '</td>';
-                    echo '<td>' .$row['engineSize'] .  '</td>';
-                    echo '<td>' .$row['dateBusBought'] .  '</td>';
-                    echo '<td>' .$row['nextService'] .  '</td>';                  
+                    echo '<td>' .$row['garageID'] .  '</td>';
+                    echo '<td>' .$row['name'] .  '</td>';
+                    echo '<td>' .$row['address'] .  '</td>';
+                    echo '<td>' .$row['phoneNo'] .  '</td>';
+                    echo '<td>' .$row['nameOfGarage'] .  '</td>';
+                    echo '<td>' .$row['manager'] .  '</td>';               
                     echo '<td>'
-                    . '<a href="viewGarage.php?id='.$row['garagesID'].'">View</a> '
-                    . '<a href="editGarageForm.php?id='.$row['garagesID'].'">Edit</a> '
-                    . '<a href="deleteGarage.php?id='.$row['garagesID'].'">Delete</a> '
+                    . '<a href="viewGarage.php?id='.$row['garageID'].'">View</a> '
+                    . '<a href="editGarageForm.php?id='.$row['garageID'].'">Edit</a> '
+                    . '<a href="deleteGarage.php?id='.$row['garageID'].'">Delete</a> '
                     . '</td>';                   
                     
                     echo ' </tr>';

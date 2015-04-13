@@ -24,11 +24,11 @@ class GarageTableGateway {
 
     public function getGarageById($gID) {
         // execute a query to get the user with the specified id
-        $sqlQuery = "SELECT * FROM garages WHERE garagesID = :garagesID";
+        $sqlQuery = "SELECT * FROM garages WHERE garageID = :garageID";
 
         $statement = $this->connection->prepare($sqlQuery);
         $params = array(
-            "garagesID" => $gID
+            "garageID" => $gID
         );
 
         $status = $statement->execute($params);
@@ -66,11 +66,11 @@ class GarageTableGateway {
     }
     
     public function deleteGarage ($gID) {
-        $sqlQuery = "DELETE FROM garages WHERE garagesID = :garagesID";
+        $sqlQuery = "DELETE FROM garages WHERE garageID = :garageID";
         
         $statement = $this->connection->prepare($sqlQuery);
         $params = array(
-            "garagesID" => $gID
+            "garageID" => $gID
         );
         
         $status = $statement->execute($params);
@@ -91,12 +91,12 @@ class GarageTableGateway {
                 "phoneNo = :phoneNo, " .
                 "nameOfGarage = :nameOfGarage, " .
                 "manager = :manager, " .
-                "WHERE garagesID = :garagesID";
+                "WHERE garageID = :garageID";
         
         $statement = $this->connection->prepare($sqlQuery);
         $params = array
             (
-            "garagesID" => $gID,
+            "garageID" => $gID,
             "name" => $n,
             "address" => $a,
             "phoneNo" => $pn,
@@ -107,7 +107,6 @@ class GarageTableGateway {
         $status = $statement->execute($params);
         
         return ($statement->rowCount() == 1);
-
     }   
 
 }

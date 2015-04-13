@@ -2,17 +2,26 @@
 require_once 'Bus.php';
 require_once 'Connection.php';
 require_once 'BusTableGateway.php';
-
-
 /* "require_once" means that a stored piece of data
   will remain as an output by having to load it just once*/
 
 require_once 'ensureUserLoggedIn.php';
 
+if (isset($_GET) && isset($_GET['sortOrder'])) {
+    $sortOrder = $_GET['sortOrder'];
+    $columnNames = array("regNo", "Make", "Model", "NoOfSeats", "engineSize", "dateBusBought", "nextService", "garageName");
+    if (!in_array($sortOrder, $columnNames)) {
+        $sortorder = 'regNo';
+    }
+}
+else {
+       $sortOrder = 'regNo';
+}
+
 $connection = Connection::getInstance();
 $gateway = new BusTableGateway($connection);
 
-$statement = $gateway->getBuses();
+$statement = $gateway->getBuses($sortOrder);
 ?>
 
 <!DOCTYPE html>
@@ -37,15 +46,16 @@ $statement = $gateway->getBuses();
         <table border ="1" style="width:100%" id="t01">           
             <thead>
                 <tr>
-                    <th>Buses ID</th>
-                    <th>Registration Number</th>
-                    <th>Make</th>
-                    <th>Model</th>
-                    <th>Seat Numbers</th>
-                    <th>Engine Size</th>
-                    <th>Date Bought</th>
-                    <th>Next Service</th>
-                    <th>Garage</th>
+
+                    <th><a href="viewBuses.php?sortOrder=regNo">Registration Number</a></th>
+                    <th><a href="viewBuses.php?sortOrder=Make">Make</a></th>
+                    <th><a href="viewBuses.php?sortOrder=Model">Model</a></th>
+                    <th><a href="viewBuses.php?sortOrder=NoOfSeats">Number of Seats</a></th>
+                    <th><a href="viewBuses.php?sortOrder=engineSize">Engine Size</a></th>
+                    <th><a href="viewBuses.php?sortOrder=dateBusBought">Date Bought</a></th>
+                    <th><a href="viewBuses.php?sortOrder=nextService">Next Service</a></th>
+                    <th><a href="viewBuses.php?sortOrder=garageName">Garage</a></th>
+                    <th>Options</th>
                 </tr>
             </thead>
             <tbody>
@@ -53,7 +63,7 @@ $statement = $gateway->getBuses();
                 $row = $statement->fetch(PDO::FETCH_ASSOC);
                 while($row)
                 {
-                    echo '<td>' .$row['busesID'] .  '</td>';
+
                     echo '<td>' .$row['regNo'] .  '</td>';
                     echo '<td>' .$row['Make'] .  '</td>';
                     echo '<td>' .$row['Model'] .  '</td>';

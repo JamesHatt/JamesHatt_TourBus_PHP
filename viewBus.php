@@ -5,22 +5,23 @@ require_once 'BusTableGateway.php';
 /* "require_once" means that a stored piece of data
   will remain as an output by having to load it just once*/
 
-$id = session_id();
-if ($id == "") {
-    session_start();
-}
+require_once 'ensureUserLoggedIn.php';
 
-require 'ensureUserLoggedIn.php';
-
-if (!isset($_GET) || !isset($_GET['id'])) {
-    die('Invalid request');
+if (isset($_GET) && isset($_GET['sortOrder'])) {
+    $sortOrder = $_GET['sortOrder'];
+    $columnNames = array("regNo", "make", "model", "noOfSeats", "engineSize", "dateBusBought", "nextService", "garageName");
+    if (!in_array($sortOrder, $columnNames)) {
+        $sortorder = 'regNo';
+    }
 }
-$id = $_GET['id'];
+else {
+       $sortOrder = 'regNo';
+}
 
 $connection = Connection::getInstance();
-$busGateway = new BusTableGateway($connection);
+$gateway = new BusTableGateway($connection);
 
-$buses = $busGateway->getBusById($id);
+$statement = $gateway->getBuses($sortOrder);
 ?>
 <!DOCTYPE html>
 <html>
@@ -45,35 +46,35 @@ $buses = $busGateway->getBusById($id);
                 $row = $statement->fetch(PDO::FETCH_ASSOC);
                     echo '<tr>';
                     echo '<td>Registration Number:</td>'
-                    . '<td>' . $bus['regNo'] . '</td>';
+                    . '<td>' . $row['regNo'] . '</td>';
                     echo '</tr>';
                     echo '<tr>';
                     echo '<td>Make:</td>'
-                    . '<td>' . $bus['Make'] . '</td>';
+                    . '<td>' . $row['Make'] . '</td>';
                     echo '</tr>';
                     echo '<tr>';
                     echo '<td>Model:</td>'
-                    . '<td>' . $bus['Model'] . '</td>';
+                    . '<td>' . $row['Model'] . '</td>';
                     echo '</tr>';
                     echo '<tr>';
                     echo '<td>Number of Seats:</td>'
-                    . '<td>' . $bus['NoOfSeats'] . '</td>';
+                    . '<td>' . $row['NoOfSeats'] . '</td>';
                     echo '</tr>';
                     echo '<tr>';
                     echo '<td>Engine Size:</td>'
-                    . '<td>' . $bus['engineSize'] . '</td>';
+                    . '<td>' . $row['engineSize'] . '</td>';
                     echo '</tr>';
                     echo '<tr>';
                     echo '<td>Date Bus Bought:</td>'
-                    . '<td>' . $bus['dateBusBought'] . '</td>';
+                    . '<td>' . $row['dateBusBought'] . '</td>';
                     echo '</tr>';
                     echo '<tr>';
                     echo '<td>Next Bus Service:</td>'
-                    . '<td>' . $bus['nextService'] . '</td>';
+                    . '<td>' . $row['nextService'] . '</td>';
                     echo '</tr>';
                     echo '<tr>';
                     echo '<td>Garage:</td>'
-                    . '<td>' . $bus['garageName'] . '</td>';
+                    . '<td>' . $row['garageName'] . '</td>';
                     echo '</tr>';
                 ?>
             </tbody>
@@ -84,7 +85,8 @@ $buses = $busGateway->getBusById($id);
             <a class="deleteBus" href="deleteBus.php?id=<?php echo $row['busesID']; ?>">
                 Delete Bus</a>
         </p>
-        <?php require 'toolbar.php' ?>
+           <?php require 'footer.php'; ?>
+
     </body>
 </html>
 

@@ -5,15 +5,23 @@ require_once 'BusTableGateway.php';
 /* "require_once" means that a stored piece of data
   will remain as an output by having to load it just once*/
 
-$id = session_id();
-if ($id == "") {
-    session_start();
+require_once 'ensureUserLoggedIn.php';
+
+if (isset($_GET) && isset($_GET['sortOrder'])) {
+    $sortOrder = $_GET['sortOrder'];
+    $columnNames = array("regNo", "make", "model", "noOfSeats", "engineSize", "dateBusBought", "nextService", "garageName");
+    if (!in_array($sortOrder, $columnNames)) {
+        $sortorder = 'regNo';
+    }
+}
+else {
+       $sortOrder = 'regNo';
 }
 
 $connection = Connection::getInstance();
 $gateway = new BusTableGateway($connection);
 
-$statement = $gateway->getBuses();
+$statement = $gateway->getBuses($sortOrder);
 ?>
 <!DOCTYPE html>
 <html>

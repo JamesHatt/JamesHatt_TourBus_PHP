@@ -17,15 +17,15 @@ if (!isset($_GET) || !isset($_GET['id'])) {
 }
 $id = $_GET['id'];
 
-$conn = Connection::getInstance();
+$connection = Connection::getInstance();
 $gateway = new BusTableGateway($connection);
 $garageGateway = new GarageTableGateway($connection);
 
-$buses = $gateway->getBusById($bID);
-if ($buses->rowCount() !== 1) {
+$statement = $gateway->getBusById($id);
+if ($statement->rowCount() !== 1) {
     die("Illegal request");
 }
-$Bus = $Buses->fetch(PDO::FETCH_ASSOC);
+$row = $statement->fetch(PDO::FETCH_ASSOC);
 
 $garages = $garageGateway->getGarages();
 ?>
@@ -206,6 +206,18 @@ $garages = $garageGateway->getGarages();
             </table>
 
         </form>
-          <?php require 'footer.php' ?>
+          <?php require 'footer.php';
+          echo '<pre>';
+        print_r($_POST);
+        print_r($params);
+        print_r($sqlQuery);
+        echo '</pre>';
+          
+          
+          
+          
+          
+          ?>
+         
     </body>
 </html>

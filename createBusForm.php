@@ -20,7 +20,7 @@ $garages = $garageGateway->getGarages();
         <meta charset="UTF-8">
         <title></title>
         <script type="text/javascript" src="js/bus.js"></script>
-        <link rel="stylesheet" type ="style/css" href =Css/style.css>
+        <link rel="stylesheet" type ="style/css" href =css/style.css>
     </head>
     <body>
        
@@ -56,14 +56,14 @@ $garages = $garageGateway->getGarages();
                     <tr>
                         <td>Make</td>
                         <td>
-                            <input type="text" name="make" value="<?php
-                                    if (isset($_POST) && isset($_POST['make'])) {
-                                        echo $_POST['make'];
+                            <input type="text" name="Make" value="<?php
+                                    if (isset($_POST) && isset($_POST['Make'])) {
+                                        echo $_POST['Make'];
                                     }
                                 ?>" />
-                            <span id="makeError" class="error"> <?php
-                                if (isset($errorMessage) && isset($errorMessage['make'])) {
-                                    echo $errorMessage['make'];
+                            <span id="MakeError" class="error"> <?php
+                                if (isset($errorMessage) && isset($errorMessage['Make'])) {
+                                    echo $errorMessage['Make'];
                                 }
                                 ?>
                             </span>
@@ -72,14 +72,14 @@ $garages = $garageGateway->getGarages();
                     <tr>
                         <td>Model</td>
                         <td>
-                            <input type="text" name="model" value="<?php
-                                    if (isset($_POST) && isset($_POST['model'])) {
-                                        echo $_POST['model'];
+                            <input type="text" name="Model" value="<?php
+                                    if (isset($_POST) && isset($_POST['Model'])) {
+                                        echo $_POST['Model'];
                                     }
                                 ?>" />
-                            <span id="modelError" class="error"><?php
-                                if (isset($errorMessage) && isset($errorMessage['model'])) {
-                                    echo $errorMessage['model'];
+                            <span id="ModelError" class="error"><?php
+                                if (isset($errorMessage) && isset($errorMessage['Model'])) {
+                                    echo $errorMessage['Model'];
                                 }
                                 ?>
                             </span>
@@ -88,14 +88,14 @@ $garages = $garageGateway->getGarages();
                     <tr>
                         <td>Number of Seats</td>
                         <td>
-                            <input type="text" name="noOfSeats" value="<?php
-                                    if (isset($_POST) && isset($_POST['noOfSeats'])) {
-                                        echo $_POST['noOfSeats'];
+                            <input type="text" name="NoOfSeats" value="<?php
+                                    if (isset($_POST) && isset($_POST['NoOfSeats'])) {
+                                        echo $_POST['NoOfSeats'];
                                     }
                                 ?>" />
-                            <span id="noOfSeatsError" class="error"><?php
-                                if (isset($errorMessage) && isset($errorMessage['noOfSeats'])) {
-                                    echo $errorMessage['noOfSeats'];
+                            <span id="NoOfSeatsError" class="error"><?php
+                                if (isset($errorMessage) && isset($errorMessage['NoOfSeats'])) {
+                                    echo $errorMessage['NoOfSeats'];
                                 }
                                 ?>
                             </span>
